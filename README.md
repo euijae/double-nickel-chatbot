@@ -35,8 +35,9 @@ State machine overview
    4. Post-screening Q&A
       - Assistant says: "Thank you. A recruiter will be in touch with you shortly. Do you have any questions about the role?"
       - The user may ask follow-up questions.
-      - If a question is off-topic (unrelated to the job/company details), the assistant answers briefly and adds: "For non-role questions, please email us at help@getdoublenickel.com." Then the chat input is disabled for that conversation.
+      - If a question is off-topic (unrelated to the job/company details), the assistant answers briefly and adds: "The eligibility result will be displayed below. Thank you for taking the time to chat with us.\n\nFor non-role questions, please email us at help@getdoublenickel.com." Then the chat input is disabled for that conversation.
    5. Finish
+      - If the applicant indicates they're done (e.g., "No" or "That's all"), the assistant closes with: "Thank you so much. Have a great day."
       - The app displays an eligibility panel summarizing which requirements were met or missed.
 
 Eligibility Rules
@@ -50,12 +51,12 @@ Chat History & Rooms
 - Multiple chats ("rooms") are supported in the sidebar.
 - Each chat shows a summary and pass/fail result after completion.
 
+## Set OpenAI API Key
+
+Create `.env` file in the root directory and add your OpenAI API key to it.
 
 ## Run it locally
 
-Create `.env` file and set your OpenAI API key in it.
-
-Then run the commands below to run the app
 ```
 python3 -m venv .venv
 source .venv/bin/activate
