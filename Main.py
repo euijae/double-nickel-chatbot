@@ -279,7 +279,7 @@ def answer_user_question_anytopic(user_text: str) -> tuple[str, bool]:
         "If you don't have a specific fact, say the recruiter can provide details. "
         "Avoid inventing policies. Keep answers to 1–3 short sentences. "
         "If the user's question is unrelated to the truck driving role or the company/job details, "
-        "still provide a brief, polite response but avoid to mention 'feel free to ask'"
+        "still provide a brief, polite response but avoid to mention 'feel free to ask' or 'let me know'."
     )
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -288,7 +288,7 @@ def answer_user_question_anytopic(user_text: str) -> tuple[str, bool]:
                   {"role": "user", "content": user_text}],
     )
     core = resp.choices[0].message.content.strip()
-    return (core, True) if on_topic else (f"The eligibility result will be displayed below. Thank you for taking the time to chat with us. \n\n{OFFTOPIC_NOTE}", False)
+    return (core, True) if on_topic else (f"{core}\n\n The eligibility result will be displayed below. Thank you for taking the time to chat with us. \n\n{OFFTOPIC_NOTE}", False)
 
 # ---------- Sidebar ----------
 with st.sidebar:
