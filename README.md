@@ -16,6 +16,8 @@
 
 The app uses a deterministic conversation flow to check eligibility by asking three initial qualification questions. Once the candidate is found eligible, job-related questions are answered by GPT, guided by a system prompt that enforces the assistant's expected behavior.
 
+One of the requirements is to end and summarize the conversation. To do this, I disabled the chat input and displayed the summary of our conversation at the same time the conversation ended. This feels more natural and meets the scope of the requirement. Happy to discuss more on this later. 
+
 State machine overview
 1. Greeting -> The assistant opens with a friendly intro and asks to begin.
 2. Consent Check
@@ -35,7 +37,7 @@ State machine overview
    4. Post-screening Q&A
       - Assistant says: "Thank you. A recruiter will be in touch with you shortly. Do you have any questions about the role?"
       - The user may ask follow-up questions.
-      - If a question is off-topic (unrelated to the job/company details), the assistant answers briefly and adds: "The eligibility result will be displayed below. Thank you for taking the time to chat with us.\n\nFor non-role questions, please email us at help@getdoublenickel.com." Then the chat input is disabled for that conversation.
+      - If a question is off-topic (unrelated to the job/company details), the assistant answers briefly and adds: "The eligibility result will be displayed below. Thank you for taking the time to chat with us.\n\nFor any further role-related questions, please email us at help@getdoublenickel.com" Then the chat input is disabled for that conversation.
    5. Finish
       - If the applicant indicates they're done (e.g., "No" or "That's all"), the assistant closes with: "Thank you so much. Have a great day."
       - The app displays an eligibility panel summarizing which requirements were met or missed.
