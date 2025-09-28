@@ -56,7 +56,7 @@ Chat History & Rooms
 Create a `.env` and copy the following into it
 
 ```dotenv
-OPEN_API_KEY="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"
+OPEN_API_KEY="<I will provide this key over the email>"
 ```
 
 Then run the commands below to run the app
