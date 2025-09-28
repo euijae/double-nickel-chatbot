@@ -29,6 +29,11 @@ def say_user(text: str):
     current_state()["history"].append({"role": "user", "content": text})
 
 def is_negative(user_text: str) -> bool:
+    """
+    Determine the tone of user's text
+    :param user_text: user text
+    :return: true if user has no more question false otherwise
+    """
     t = (user_text or "").strip().lower()
     negative_terms = [
         "no", "nope", "nah", "not really", "i'm good", "im good", "all good",
@@ -38,6 +43,11 @@ def is_negative(user_text: str) -> bool:
     return any(term in t for term in negative_terms)
 
 def mentions_no_experience(user_text: str) -> bool:
+    """
+    Determine what user responded regarding trucking experience.
+    :param user_text: user text
+    :return: true if user has no experience false otherwise
+    """
     t = (user_text or "").strip().lower()
     patterns = [
         r"\bno experience\b", r"\bnone\b", r"\bzero\b", r"\b0\b", r"\bnever\b",
@@ -46,6 +56,11 @@ def mentions_no_experience(user_text: str) -> bool:
     return any(re.search(p, t) for p in patterns)
 
 def render_eligibility_panel(state_dict: dict):
+    """
+    Determine the user's job eligibility and render it
+    :param state_dict: state dictionary
+    :return: None
+    """
     missing = []
     if state_dict.get("has_cdl") is not True:
         missing.append("a valid Class A CDL")
