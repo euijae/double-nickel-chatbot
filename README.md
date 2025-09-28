@@ -50,12 +50,12 @@ Chat History & Rooms
 - Multiple chats ("rooms") are supported in the sidebar.
 - Each chat shows a summary and pass/fail result after completion.
 
+## Set OpenAI API Key
+
+Create `.env` file in the root directory and add your OpenAI API key to it.
 
 ## Run it locally
 
-Create `.env` file and set your OpenAI API key in it.
-
-Then run the commands below to run the app
 ```
 python3 -m venv .venv
 source .venv/bin/activate
