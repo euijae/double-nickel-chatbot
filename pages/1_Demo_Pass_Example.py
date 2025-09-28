@@ -1,4 +1,4 @@
 import streamlit as st
 
-st.subheader("Pass Example")
-st.video("./assets/demo_1.webm")
+st.subheader("Eligible example")
+st.video("./assets/demo-2.webm")
