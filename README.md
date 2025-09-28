@@ -53,7 +53,7 @@ Chat History & Rooms
 
 ## Run it locally
 
-Create a `.env` file and set your OpenAI API key in it.
+Create `.env` file and set your OpenAI API key in it.
 
 Then run the commands below to run the app
 ```
