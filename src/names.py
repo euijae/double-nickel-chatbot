@@ -2,6 +2,7 @@ import random
 import streamlit as st
 from src.state import new_state
 
+# Randomly generate client's name
 first_names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Timothy", "Kate", "Jane", "Kimberly", "Robert"]
 last_names  = ["Smith", "Jones", "Williams", "Brown", "Davis", "James", "Miller", "Doe", "Kim", "Garcia"]
 

@@ -13,6 +13,12 @@ def _client():
     return OpenAI(api_key=API_KEY) if API_KEY else None
 
 def classify(user_text: str, intent_hint: str = "generic"):
+    """
+    Classify user intent using OpenAI's API.
+    :param user_text: user text
+    :param intent_hint: type of intent to classify
+    :return: type of intent to classify
+    """
     client = _client()
     if client is None:
         txt = (user_text or "").strip().lower()
@@ -31,12 +37,13 @@ def classify(user_text: str, intent_hint: str = "generic"):
         '{"answer_type": one of ["affirmative","negative","number","unknown","other"], '
         '"number_value": integer or null, "reason": short string}. Be strict JSON (no prose).'
     )
+    # prompt
     examples = """
-User: "yep I have it" -> {"answer_type":"affirmative","number_value":null,"reason":"yes cdl"}
-User: "nope" -> {"answer_type":"negative","number_value":null,"reason":"no"}
-User: "about 3 years" -> {"answer_type":"number","number_value":3,"reason":"3 years"}
-User: "a while" -> {"answer_type":"unknown","number_value":null,"reason":"vague"}
-"""
+        User: "yep I have it" -> {"answer_type":"affirmative","number_value":null,"reason":"yes cdl"}
+        User: "nope" -> {"answer_type":"negative","number_value":null,"reason":"no"}
+        User: "about 3 years" -> {"answer_type":"number","number_value":3,"reason":"3 years"}
+        User: "a while" -> {"answer_type":"unknown","number_value":null,"reason":"vague"}
+    """
     user_msg = f"Current question intent: {intent_hint}.\nApplicant said: {user_text}\n{examples}"
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -59,6 +66,11 @@ User: "a while" -> {"answer_type":"unknown","number_value":null,"reason":"vague"
         return {"answer_type": "unknown", "number_value": None, "reason": "parse_error"}
 
 def is_truck_related(text: str) -> bool:
+    """
+    Determine if a text is related to a truck.
+    :param text: question text
+    :return: true if related question is truck related
+    """
     t = (text or "").strip().lower()
     truck_keywords = [
         "truck", "driv", "cdl", "class a", "mvr", "routes", "lanes", "miles", "cents per mile",
@@ -91,6 +103,11 @@ def is_truck_related(text: str) -> bool:
     return label == "truck"
 
 def answer_user_question(user_question_text: str) -> str:
+    """
+    answer user question using OpenAI's API.
+    :param user_question_text: question text
+    :return: answer text
+    """
     t = (user_question_text or "").lower()
     if any(k in t for k in ["pay", "salary", "wage", "rate", "cents per mile", "compensation", "money"]):
         return PAY_LINE
@@ -112,6 +129,11 @@ def answer_user_question(user_question_text: str) -> str:
     return resp.choices[0].message.content.strip()
 
 def answer_user_question_anytopic(user_text: str) -> tuple[str, bool]:
+    """
+    Answer user's any question using OpenAI's API
+    :param user_text: question text
+    :return: answer text and true if truck related false otherwise
+    """
     t = (user_text or "").lower()
     if any(k in t for k in ["pay", "salary", "wage", "rate", "cents per mile", "compensation", "money"]):
         return PAY_LINE, True
